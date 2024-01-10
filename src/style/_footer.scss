@@ -1,0 +1,27 @@
+.footer-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    border: 5px solid black;
+    border-style: dashed;
+    background: #FBF315;
+    color: black;
+}
+
+.kontakt-container{
+    margin: 8px;
+    display: grid;
+    align-items: center;
+}
+
+.info-container{
+    display: grid;
+    align-items: center;
+    margin: 8px;
+}
+
+.image-footer{
+    height: auto;
+    width: 10%;
+}

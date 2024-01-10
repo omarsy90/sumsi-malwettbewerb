@@ -1,0 +1,47 @@
+h2{
+    text-align: center;
+    color: darkviolet;
+}
+
+.image{
+    height: auto;
+    width: 20%;
+}
+
+.image2{
+    background: #FBF315;
+    height: auto;
+    width: 70%;
+    border-radius: 2rem;
+    padding: 10px;
+    margin: 10px;
+}
+
+.erklärung-container{
+    margin: 15px;
+    padding: 15px;
+    border: 5px dashed #000000;
+    border-radius: 2rem;
+}
+
+.bild-container{
+    width: 20%;
+}
+
+.bild-text{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 4px;
+
+    p{
+        display: inherit;
+        background: #000000;
+        color: white;
+        padding: 10px;
+        align-items: center;
+        border-radius: 15px;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}

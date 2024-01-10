@@ -1,0 +1,64 @@
+@import './header';
+@import './erklärungsschritte';
+@import './infosection';
+@import './bildersection';
+@import './footer';
+@import './mobile-menu';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana Regular;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+    .bilder_abteilung {
+
+        .element {
+
+            width: 100%;
+        }
+
+    }
+
+}
+
+
+@media only screen and (max-width: 800px) {
+
+    .coolertext {
+        visibility: hidden;
+    }
+
+    header {
+
+        height: 100px;
+
+        nav {
+            display: none;
+        }
+
+        .nav_mobile {
+            display: block;
+        }
+
+
+    }
+
+    h1 {
+
+        top: 400px;
+    }
+
+
+}
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./src/style/anmelungpage.css" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./src/js/translate.js" defer></script>
+    <script src="./src/js/anmeldung.js" defer></script>
+</head>
+
+<body>
+ 
+    <nav class="sprache">
+        <ul>
+            <li class="flagge de">
+                <img src="./src/img/deutsh.png"> 
+            </li>
+
+            <li class="flagge en">
+                <img src="./src/img/englisch.png">
+            </li>
+        </ul>
+
+    </nav>
+
+    
+
+    <form  id="form" enctype="multipart/form-data">
+
+      <h1> <strong>Kontaktformular zum bilder hochladen </strong></h1> 
+
+        <p>bitte hier alle Pflichtfelder ausfüllen , den einzelnen Bedingungen zustimmen und das bild hochladen</p>
+
+        
+
+        <div class="form-group hidelabel">
+            <label for="vorname">Title <span>Use title case to get a better result</span></label>
+            <input type="text" name="vorname" id="vorname" class="form-controll" placeholder="vorname Erziehungsberichtige/r *" required />
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="nachname">Title <span>Use title case to get a better result</span></label>
+            <input type="text" name="nachname" id="nachname" class="form-controll" placeholder="nachname Erziehungsberichtige/r *" required />
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="email">Title <span>Use title case to get a better result</span></label>
+            <input type="email" name="email" id="email" class="form-controll" placeholder="E-mail-adresse zum Verständigen *" required />
+        </div>
+
+
+        <div class="form-group hidelabel">
+            <label for="kindname">Caption <span>This caption should be descriptiv</span></label>
+            <input type="text" name="kindname" id="kindname" class="form-controll" placeholder="Vorname kind *" required/>
+        </div>
+
+        <div class="form-group  hidelabel">
+            <label for="alter">Title <span>Use title case to get a better result</span></label>
+            <input type="number" name="alter" id="alter" class="form-controll" placeholder="Alter kind *" required/>
+        </div>
+
+        <div class="form-group file-area">
+            
+            <input type="file" name="image" id="image" required="required"  />
+            <div class="file-dummy">
+                <p class="success">Gut gemacht, dein Bild wurde ausgewählt</p>
+                <p class="default"> Bitte ein Bild einfügen</p>
+            </div>
+        </div>
+
+        <div class="form-group form-checkbox">
+        <input type="checkbox" id="zustimmung1" name="zustimmung1" value="1" required>
+        <label for="vehicle1"> Zustimmung Urheberrecht</label><br>
+        <input type="checkbox" id="zustimmung2" name="zustimmung2" value="1" required>
+        <label for="vehicle2"> Zustimmung Teilname Ausstellung</label><br>
+        <input type="checkbox" id="zustimmung3" name="zustimmung3" value="1" required>
+        <label for="vehicle3"> Zustimmung Verständigung per Mail</label><br>
+        <span>* Pflichtfelder</span>
+        </div>
+
+        
+
+    </form>
+
+    <div class="form-group" >
+        <button id="submite">hochladen</button>
+    </div>
+
+    <!-- div for error after sending data-->
+    <div class="form-group">
+        <p style="color: red; display: none;" id="error" >gfgfgfg </p>
+    </div>
+    <!---->
+
+    <!--div for seccess message after sending data-->
+    <div class="from-group">
+        <p style="color: green; display: none;" id="success" >vielen Dank für deine Teilnahme !  dein Kunstwerk wird in küzrze in Galerie zu sehen sein</p>
+    </div>
+       <!-- -->
+
+    <div class="anmelde-container">
+        <h4>KONTAKTFORMULAR ZUM BILDER-HOCHLADEN</h4>
+        <h4> Bitte hier alle Pflichtfelder ausfüllen,den einzelnen Bedingungen zustimmen und das Bild hochladen!</h4>
+        <p style="background: #FBF315; color: #000000;"><b>Vielen Danke für Deine Teilnahme</b> <br>
+        <b>Dein Kunstwerk wird in Kürze in der Sumsi Galerie zu sehen sein.</b></p>
+    </div>
+
+
+
+
+    
+
+    <a href="./homepage.html" class="back-to-article" > statrtseite</a>
+
+
+    <script>
+        console.log('hallow worls!') ;
+        var elementType = document.getElementsByTagName('input');
+
+if (elementType[0].tagName =='INPUT'){
+
+    console.log(elementType[0].placeholder);
+}
+    </script>
+
+
+</body>
+
+</html>
