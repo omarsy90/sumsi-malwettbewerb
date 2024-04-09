@@ -1,4 +1,4 @@
-console.log('hallow world !') ;
+
 
 window.addEventListener('resize', ()=>{
 

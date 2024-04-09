@@ -20,12 +20,8 @@ class IMAGE {
         this.extention = extention ;
         this.size = size ;
         this.location = './uploads/'+this.name ;
-
        IMAGE.imgaesArray.push(this) ;
-
         return this ;
-
-
     }
 
       static findImageBeiurl(url){

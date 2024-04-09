@@ -1,4 +1,4 @@
-console.log('hallow world!');
+
 
 function headerAnpassen() {
     const navicon = document.querySelector('.nav_mobile');
@@ -17,45 +17,7 @@ function headerAnpassen() {
 }
 headerAnpassen();
 
-function implementAllElement(sprache) {
-    let elements = document.getElementsByTagName('INPUT');
-    looptrans(elements, sprache)
-        .then(() => {
-            elements = document.getElementsByTagName('h1')
-            looptrans(elements, sprache)
-        })
-        .then(() => {
-            elements = document.getElementsByTagName('h2')
-            looptrans(elements, sprache)
-        })
-        .then(() => {
-            elements = document.getElementsByTagName('h3')
-            looptrans(elements, sprache)
-        }).then(() => {
-            elements = document.getElementsByTagName('h4')
-            looptrans(elements, sprache)
-        })
-        .then(() => {
-            elements = document.getElementsByTagName('span')
-            looptrans(elements, sprache)
-        })
-        .then(() => {
-            elements = document.getElementsByTagName('a')
-            looptrans(elements, sprache)
-        })
-        .then(() => {
-            elements = document.getElementsByTagName('p')
-            looptrans(elements, sprache)
-        }).then(() => {
-            elements = document.getElementsByTagName('strong')
-            looptrans(elements, sprache)
-        })
-        .then(() => {
-            elements = document.getElementsByTagName('button')
-            looptrans(elements, sprache)
-        })
-        
-}
+
 
 const bilderSection = document.getElementById('bilder');
 console.log(bilderSection);
@@ -128,14 +90,3 @@ seemoreButton.addEventListener('click',(event)=>{
 
 })  ;
 
-window.addEventListener('resize', ()=>{
-
-    console.log(window.innerWidth) ;
-  
-    if(window.innerWidth >= 800) {
-      const navDiv = document.querySelector('.menu-mobile');
-      navDiv.style.display = 'none';
-    }
-  
-  
-  });

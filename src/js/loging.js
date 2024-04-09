@@ -1,4 +1,4 @@
-console.log('ich bin nin log in ');
+
 
 function headerAnpassen() {
   const navicon = document.querySelector('.nav_mobile');
@@ -37,7 +37,7 @@ sendButton.addEventListener('click', (event) => {
 
   getAutho(data).then(res => {
 
-    console.log(res);
+    
 
     if (res.token) {
       // access is successed
@@ -149,9 +149,6 @@ function implementAllElement(sprache) {
 
 // to hide menue-mobile when the screen become bigger
 window.addEventListener('resize', ()=>{
-
-  console.log(window.innerWidth) ;
-
   if(window.innerWidth >= 800) {
     const navDiv = document.querySelector('.menu-mobile');
     navDiv.style.display = 'none';
