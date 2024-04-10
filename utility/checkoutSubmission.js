@@ -1,7 +1,7 @@
 const checkoutSubmission = (req, res, next) =>
  {
 
-    console.log(req);
+    
 
     let err = "";
    
@@ -45,7 +45,7 @@ const checkoutSubmission = (req, res, next) =>
         };
 
 
-  console.log(err);
+ 
     if(err !=="" ){
      return    res.status(422).json({
             status:'failed',

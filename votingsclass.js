@@ -1,5 +1,5 @@
 const createHash = require('hash-generator');
-const submission = require('./submissionclass').SUBMISSION ;
+const submission = require('./submissionRepository') ;
 class VOTING {
 
 

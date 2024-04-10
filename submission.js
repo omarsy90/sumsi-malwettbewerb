@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const submission = require('./submissionclass').SUBMISSION;
+const submission = require('./submissionRepository');
 
 const image = require('./imageclass').IMAGE;
 
@@ -59,14 +59,18 @@ router.get('/:sub_id', (req, res) => {
 
 router.post('/',upload.single('image'),checkoutSubmission , (req, res) => {
 
-    const image1 = new image(req.file?.filename, req.file?.mimetype.split('/')[1], req.file?.size)
-    const sub = new submission(req.body.vorname, req.body.nachname, req.body.email, req.body.kindname, req.body.alter, req.body.zustimmung1, req.body.zustimmung2, req.body.zustimmung3, image1.id);
+    //console.log(req.file);
+    submission.Addsubmission("","","","",0,"");
+   // const image1 = new image(req.file?.filename, req.file?.mimetype.split('/')[1], req.file?.size)
+    //const sub = new submission(req.body.vorname, req.body.nachname, req.body.email, req.body.kindname, req.body.alter, req.body.zustimmung1, req.body.zustimmung2, req.body.zustimmung3, image1.id);
+
+   // add submission to database
 
     res.status(200).json({
         status: "success",
         status_code: 200,
         message: "api.messages.store.success",
-        data: sub
+       
     })
 });
 
