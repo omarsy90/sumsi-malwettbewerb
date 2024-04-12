@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const submission = require('./submissionRepository');
+const submissionRepo = require('./submissionRepository');
 
 const image = require('./imageclass').IMAGE;
 
@@ -57,21 +57,51 @@ router.get('/:sub_id', (req, res) => {
 });
 
 
-router.post('/',upload.single('image'),checkoutSubmission , (req, res) => {
+router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
 
-    //console.log(req.file);
-    submission.Addsubmission("","","","",0,"");
+    //check if there is a submission for requested Email
+  const checkData =await   submissionRepo.CheckSubmission(req.body.email) ;
+   if(checkData.rowsAffected[0] ===0)
+   {   
+      // email first Time requested
+    const firstname = req.body.legalguardian_firstname;
+    const lastname = req.body.legalguardian_lastname;
+    const email = req.body.email;
+    const childName = req.body.child_firstname;
+    const childAge = req.body.child_age;
+    const ImgName = req.file.filename ;
+
+   await submissionRepo.Addsubmission(firstname,lastname,email,childName, childAge,ImgName);
+   const LastRecord = await submissionRepo.GetTheMostInsertedRecord();
+   const obj = LastRecord.recordset;
+      
+    return res.status(200).json({
+        status:"success",
+        status_code:200,
+        submission:obj
+     })
+       
+   }else{
+    // email is already registered
+  return    res.status(400).json({
+        status: "failed",
+        status_code :400,
+        message : "email has been already registered !"
+      })
+   }
+    
+   // submission.Addsubmission("test","test","test","test",0,"test");
    // const image1 = new image(req.file?.filename, req.file?.mimetype.split('/')[1], req.file?.size)
     //const sub = new submission(req.body.vorname, req.body.nachname, req.body.email, req.body.kindname, req.body.alter, req.body.zustimmung1, req.body.zustimmung2, req.body.zustimmung3, image1.id);
 
    // add submission to database
 
-    res.status(200).json({
+   /* res.status(200).json({
         status: "success",
         status_code: 200,
         message: "api.messages.store.success",
        
-    })
+    }) */
 });
 
 

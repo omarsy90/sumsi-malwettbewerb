@@ -1,10 +1,6 @@
 const checkoutSubmission = (req, res, next) =>
  {
-
-    
-
-    let err = "";
-   
+    let err = ""; 
     const legalguardian_firstname = req.body.legalguardian_firstname;
     const legalguardian_lastname = req.body.legalguardian_lastname;
     const email = req.body.email;
@@ -25,11 +21,11 @@ const checkoutSubmission = (req, res, next) =>
         if (!email) {
             err += '\nThe email field is required'
         }
-        if (!child_firstname) {
+        if (!child_firstname ) {
             err += '\nthe child_firstname is required'
         }
-        if (!child_age) {
-            err += '\nchild_age is required'
+        if (!child_age || isNaN(child_age)) {
+            err += '\nchild_age is required and must be number'
         }
         if (!approval_privacypolicy ) {
             err += '\nThe approval privacypolicy field is required.'

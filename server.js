@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const cors = require('cors'); // middleware 
 const cookieParser = require('cookie-parser') // import(require it) the cookie-parser middleware
 var jwt = require('jsonwebtoken');
@@ -25,6 +26,13 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 
+
+app.get('/:FileName', (req,res)=>{
+    console.log(__dirname);
+    const filePath = path.join(__dirname, 'uploads', req.params.FileName)
+res.sendFile(filePath);
+
+});
 app.use('/submission',SubmissionRouter);
 app.use('/voting',VoteRouter);
 
