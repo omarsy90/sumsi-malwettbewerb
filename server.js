@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path')
 const cors = require('cors'); // middleware 
@@ -39,6 +40,7 @@ app.use('/voting',VoteRouter);
 
 app.listen(3000, () => {
     console.log('server is running...');
+    console.log(process.env.test)
 })
 
 //-------------------------------------------------------code von api ----------------
