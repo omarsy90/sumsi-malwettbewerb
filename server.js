@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path')
 const cors = require('cors'); // middleware 
 const cookieParser = require('cookie-parser') // import(require it) the cookie-parser middleware
-var jwt = require('jsonwebtoken');
+
 
 // to change the situation of submission and voting
 const submissionOpen = true;
@@ -12,8 +12,9 @@ const votingOpen = true;
 const app = express();
 const port = process.env.PORT || 3000;
 
-const SubmissionRouter = require('./submission');
-const VoteRouter = require('./voting.js');
+const SubmissionRouter = require('./submissionRouter.js');
+const VoteRouter = require('./votingRouter.js');
+const AuthRouter = require('./authRouter.js');
 
 // middleware  (use it!)------------------------------------
 app.use(cors())
@@ -28,14 +29,14 @@ app.use(express.json());
 
 
 
+app.use('/login',AuthRouter);
+app.use('/submission',SubmissionRouter);
+app.use('/voting',VoteRouter);
 app.get('/:FileName', (req,res)=>{
     
     const filePath = path.join(__dirname, 'uploads', req.params.FileName)
     res.sendFile(filePath);
-
 });
-app.use('/submission',SubmissionRouter);
-app.use('/voting',VoteRouter);
 
 
 app.listen(3000, () => {
@@ -47,61 +48,11 @@ app.listen(3000, () => {
 //-------------------------------------------------------code von api ----------------
 
 
-app.get('/setting', (req, res) => {
-
-
-    return res.status(200).json({
-
-        status: "success",
-        status_code: 200,
-        message: "api.messages.index.success",
-        data: {
-            submission_open: submissionOpen,
-            voting_open: votingOpen
-        }
-    });
-
-
-});
-
-var privateKey = '112358'
-
-app.post('/login', (req, res) => {
-    // res.clearCookie("test");
-    // const auth = req.headers.cookie?.split(';')[0]?.split('=')[1]
-    //   console.log(auth);
-    /*  try {
-          var decoded = jwt.verify(auth, privateKey);
-          console.log(decoded);
-        } catch(err) {
-          // err
-        }
-          */
 
 
 
-    const creadentials = {
-        email: 'kosche@gmail.com',
-        password: '1123581321'
-    };
-
-    if (req.body.email === creadentials.email && req.body.password === creadentials.password) {
-
-        var token = jwt.sign(creadentials, privateKey);
-
-        //  res.cookie('Autho',token,/* { maxAge: 900000, httpOnly: true }*/);
-        //  res.cookie('test','hi',/* { maxAge: 900000, httpOnly: true }*/);
-
-        return res.status(200).json({
-            status: 'access',
-            token: token
-        })
-
-    }
-
-    return res.status(401).json({
-        error: 'invalid credentials'
-    })
 
 
-});
+
+
+  

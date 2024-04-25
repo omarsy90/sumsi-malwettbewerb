@@ -2,7 +2,7 @@ const express = require('express') ;
 const router = express.Router() ;
 
 
-const voting = require('./votingsclass').VOTING;
+
 
 const checkVotingRequest = (req, res, next) => {
        

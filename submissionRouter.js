@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const submissionRepo = require('./submissionRepository');
+const submissionRepo = require('./utility/submissionRepository');
 
 const image = require('./imageclass').IMAGE;
 
@@ -11,19 +11,16 @@ const upload = require('./utility/multer');
 
 
 
-router.get('/', (req, res) => {
-
-    submission.submissionsArray.map(sub => {
-        sub.image = image.imgaesArray.find(img => img.id == sub.imageId)
-    });
-
-    
-
+router.get('/', async(req, res) => {
+    let data = [];
+    var responseData = await  submissionRepo.GetSubmissions() ;
+     data = responseData.recordset;
+     
     res.status(200).json({
         status: "success",
         status_code: 200,
         message: "api.messages.index.success",
-        data: submission.submissionsArray
+        data
     });
 
 });
@@ -90,70 +87,47 @@ router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
       })
    }
     
-   // submission.Addsubmission("test","test","test","test",0,"test");
-   // const image1 = new image(req.file?.filename, req.file?.mimetype.split('/')[1], req.file?.size)
-    //const sub = new submission(req.body.vorname, req.body.nachname, req.body.email, req.body.kindname, req.body.alter, req.body.zustimmung1, req.body.zustimmung2, req.body.zustimmung3, image1.id);
-
-   // add submission to database
-
-   /* res.status(200).json({
-        status: "success",
-        status_code: 200,
-        message: "api.messages.store.success",
-       
-    }) */
+  
 });
 
 
-const fs = require('fs'); // this object we need to delete imagefile 
-router.delete('/:sub_id', (req, res) => {
-    const sub_id = req.params.sub_id;
-    const sub = submission.findSubmissionBeiId(sub_id);
-    const img = image.findImageBeiId(sub?.imageId);
+const authMan = require("./utility/AuthenticateTokenManager");
 
-    // remove submission from database
-    submission.submissionsArray.splice(submission.submissionsArray.indexOf(sub), 1);
-
-
-    //remove fileimage 
-    try {
-        if (img) {
-            fs.unlinkSync(img.location);
+router.delete('/:sub_id', async (req, res) => {
+        const sub_id = req.params.sub_id;
+        const data = await  submissionRepo.DeleteSubmissionByID(sub_id);
+        console.log(data);
+        if( data.rowsAffected[0] < 1)
+        {
+         return    res.status(400).json({
+                status:"failed",
+                status_code:400,
+                message:"the submission is not found"
+             })
         }
-
-        //file removed
-    } catch (err) {
-        console.error(err)
-    }
-
-    //remove information of image in database
-    image.imgaesArray.splice(image.imgaesArray.indexOf(img), 1);
-
-    res.status(200).json({
-        status: "success",
-        status_code: 200,
-        message: "api.messages.delete.success",
-        data: null
-    })
+          else
+          {
+              res.status(200).json({
+                status:"success",
+                status_code:200,
+                message : "Submission has been deleted suessfully"
+              })
+          }
+    
+});
 
 
+const checkupdatePayload = require('./utility/CheckUpdatePayload');
+
+router.put('/:sub_id',checkupdatePayload ,async (req,res)=>{
+  
 
 
 });
 
 
-// to convert (1,0) ('true','false') that is string to boolean
-function toBool(string) {
-    if (string === 'true' || string === 'false' || string === '1' || string === '0') {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 
-
-// middleware to checkout status of the felds and data requested
 
 
 // ------middleware to handle multidata form -----------------------
