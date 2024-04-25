@@ -29,9 +29,9 @@ app.use(express.json());
 
 
 app.get('/:FileName', (req,res)=>{
-    console.log(__dirname);
+    
     const filePath = path.join(__dirname, 'uploads', req.params.FileName)
-res.sendFile(filePath);
+    res.sendFile(filePath);
 
 });
 app.use('/submission',SubmissionRouter);
@@ -39,6 +39,7 @@ app.use('/voting',VoteRouter);
 
 
 app.listen(3000, () => {
+    console.log(process.env.User)
     console.log('server is running...');
     console.log(process.env.test)
 })
