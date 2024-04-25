@@ -39,7 +39,7 @@ app.use('/voting',VoteRouter);
 
 
 app.listen(3000, () => {
-    console.log(process.env.User)
+    
     console.log('server is running...');
     console.log(process.env.test)
 })
