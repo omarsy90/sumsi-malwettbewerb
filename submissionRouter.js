@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-
 const submissionRepo = require('./utility/submissionRepository');
-
 const image = require('./imageclass').IMAGE;
-
 const upload = require('./utility/multer');
-
  const checkoutSubmission  = require('./utility/checkoutSubmission');
 
+
+ const tokenManger = require('./utility/AuthenticateTokenManager');
+ const checkupdatePayload = require('./utility/CheckUpdatePayload');
+ const userMan = require('./utility/UserManager');
 
 
 router.get('/', async(req, res) => {
@@ -53,7 +53,7 @@ router.get('/:sub_id', (req, res) => {
 
 });
 
-
+ 
 router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
 
     //check if there is a submission for requested Email
@@ -93,10 +93,21 @@ router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
 
 const authMan = require("./utility/AuthenticateTokenManager");
 
-router.delete('/:sub_id', async (req, res) => {
-        const sub_id = req.params.sub_id;
-        const data = await  submissionRepo.DeleteSubmissionByID(sub_id);
-        console.log(data);
+router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
+    id= req.params.sub_id; 
+    const authEmail = req.user.name;
+    const authPass = req.user.pass;
+
+   isValid = await userMan.HasAdminRole(authEmail,authPass);
+   if(isValid != true)
+   {
+    return res.status(401).json({
+        status:"failed",
+        status_code:401,
+        message:"unauthorized process"
+    })
+   }
+        const data = await  submissionRepo.DeleteSubmissionByID(id);
         if( data.rowsAffected[0] < 1)
         {
          return    res.status(400).json({
@@ -117,11 +128,44 @@ router.delete('/:sub_id', async (req, res) => {
 });
 
 
-const checkupdatePayload = require('./utility/CheckUpdatePayload');
 
-router.put('/:sub_id',checkupdatePayload ,async (req,res)=>{
-  
 
+router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkupdatePayload ,async (req,res)=>{
+    id= req.params.sub_id; 
+    const authEmail = req.user.name;
+    const authPass = req.user.pass;
+
+   isValid = await userMan.HasAdminRole(authEmail,authPass);
+   if(isValid != true)
+   {
+    return res.status(401).json({
+        status:"failed",
+        status_code:401,
+        message:"unauthorized process"
+    })
+   }
+
+    const data = await submissionRepo.UpDateSubmission(id,req.body.firstName,req.body.lastName,req.body.email,req.body.childName,req.body.childAge,req.file.filename,req.body.likeCount);
+    if(data.rowsAffected[0]< 1)
+    {
+    return res.status(404).json({
+        status:"failed",
+        status_code :404,
+        message:"submission not found"
+    })
+    }
+      
+    const UpdatedData = await submissionRepo.GetSubmissionById(id);
+
+    return res.status(200).json(
+        {
+            status:"success",
+            status_code :200,
+            submission:UpdatedData.recordset
+
+        })
+
+ 
 
 });
 

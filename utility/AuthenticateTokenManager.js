@@ -4,16 +4,17 @@ const jwt = require('jsonwebtoken');
 class AuthenticatTokenManager
 {
 
-     generateAccessToken(email) 
+     generateAccessToken(email , password) 
     {  
-        const accessToken = jwt.sign( {name: email}, process.env.TOKEN_SECRET, { expiresIn: 60 * 60*24});
+        const accessToken = jwt.sign( {name: email , pass:password}, process.env.TOKEN_SECRET, { expiresIn: 60 * 60*24});
         return accessToken ;
     }
   
 
      authenticateToken(req, res, next) 
      {
-        console.log("authentcation manager :)")
+        
+       
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.split(' ')[1]
       
@@ -22,6 +23,7 @@ class AuthenticatTokenManager
         jwt.verify(token, process.env.TOKEN_SECRET , (err, user) => {
           if (err) return res.sendStatus(403)
           req.user = user
+       
           next()
         })
       }

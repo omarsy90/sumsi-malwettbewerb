@@ -37,7 +37,7 @@ class submissionRepository
    async GetSubmissionById(ID)
     {
       await sql.connect('Server=DESKTOP-8MTNL02\\SQLEXPRESS;Database=SubmissionDB; User ID=omar;Password=123;Encrypt=True;TrustServerCertificate=True;');
-      const queryString = `Delete from Submission where SubmissionID = ${ID}`;
+      const queryString = `Select * from Submission where SubmissionID = ${ID}`;
      return await sql.query(queryString);
 
     }
