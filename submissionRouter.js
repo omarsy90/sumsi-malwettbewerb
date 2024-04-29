@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs')
 const submissionRepo = require('./utility/submissionRepository');
 const image = require('./imageclass').IMAGE;
 const upload = require('./utility/multer');
@@ -92,6 +93,7 @@ router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
 
 
 const authMan = require("./utility/AuthenticateTokenManager");
+const path = require('path');
 
 router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
     id= req.params.sub_id; 
@@ -107,7 +109,7 @@ router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
         message:"unauthorized process"
     })
    }
-        const data = await  submissionRepo.DeleteSubmissionByID(id);
+        const data = await  submissionRepo.GetSubmissionById(id);
         if( data.rowsAffected[0] < 1)
         {
          return    res.status(400).json({
@@ -116,15 +118,27 @@ router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
                 message:"the submission is not found"
              })
         }
-          else
-          {
-              res.status(200).json({
+          
+
+        // submission found
+          await submissionRepo.DeleteSubmissionByID(data.recordset[0].SubmissionID);
+
+          // delete the image related to submission
+        const imgPath = path.join(__dirname, 'uploads',data.recordset[0].ImgName);
+        fs.unlink(imgPath, (err) => {
+            if (err) {
+                console.error('Error deleting the file:');
+            } else {
+                console.log('File deleted successfully!');
+            }
+        });
+
+          return    res.status(200).json({
                 status:"success",
                 status_code:200,
                 message : "Submission has been deleted suessfully"
               })
-          }
-    
+
 });
 
 
@@ -146,6 +160,7 @@ router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkup
    }
 
     const data = await submissionRepo.UpDateSubmission(id,req.body.firstName,req.body.lastName,req.body.email,req.body.childName,req.body.childAge,req.file.filename,req.body.likeCount);
+     
     if(data.rowsAffected[0]< 1)
     {
     return res.status(404).json({
@@ -155,8 +170,9 @@ router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkup
     })
     }
       
+       
+    // retrive updated submission to client
     const UpdatedData = await submissionRepo.GetSubmissionById(id);
-
     return res.status(200).json(
         {
             status:"success",
@@ -164,8 +180,6 @@ router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkup
             submission:UpdatedData.recordset
 
         })
-
- 
 
 });
 
@@ -175,11 +189,6 @@ router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkup
 
 
 // ------middleware to handle multidata form -----------------------
-
-
-
-
-
 
 
 module.exports = router ;
