@@ -1,4 +1,4 @@
-const checkoutSubmission = (req, res, next) =>
+const checkoutSubmissionPayload = (req, res, next) =>
  {
     let err = ""; 
     const legalguardian_firstname = req.body.legalguardian_firstname;
@@ -53,7 +53,4 @@ const checkoutSubmission = (req, res, next) =>
 
 }
 
-
-
-
-module.exports = checkoutSubmission ;
+module.exports = checkoutSubmissionPayload ;

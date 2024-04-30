@@ -4,13 +4,48 @@ const fs = require('fs')
 const submissionRepo = require('./utility/submissionRepository');
 const image = require('./imageclass').IMAGE;
 const upload = require('./utility/multer');
- const checkoutSubmission  = require('./utility/checkoutSubmission');
+ const checkoutSubmissionPayload  = require('./utility/checkoutSubmissionPayload');
 
 
  const tokenManger = require('./utility/AuthenticateTokenManager');
  const checkupdatePayload = require('./utility/CheckUpdatePayload');
  const userMan = require('./utility/UserManager');
 
+ let isSubmissionEnabled = true;
+
+
+ router.post('/ControlSubmission',tokenManger.authenticateToken,async(req,res)=>{
+       
+    const authEmail = req.user.name;
+    const authPass = req.user.pass;
+    isValid = await userMan.HasAdminRole(authEmail,authPass);
+    if(isValid != true)
+    {
+     return res.status(401).json({
+         status:"failed",
+         status_code:401,
+         message:"unauthorized process"
+     })
+    }
+    
+    let message = ''
+    if(isSubmissionEnabled === true)
+    {
+        isSubmissionEnabled = false;
+        message = 'submission is unenabled'
+
+    }else{
+        isSubmissionEnabled = true;
+        message ='submission is enabled';
+    }
+
+    return res.status(200).json({
+        status:'success',
+        status_code:200,
+        message
+    })
+
+ })
 
 router.get('/', async(req, res) => {
     let data = [];
@@ -26,25 +61,25 @@ router.get('/', async(req, res) => {
 
 });
 
-router.get('/:sub_id', (req, res) => {
+router.get('/:sub_id', async(req, res) => {
 
     const sub_id = req.params.sub_id;
-    const sub = submission.findSubmissionBeiId(sub_id);
+    const data = await submissionRepo.GetSubmissionById(sub_id);
 
-    if (sub) {
-        const img = image.findImageBeiId(sub.imageId)
-        sub.image = img
+    if (data.rowsAffected[0] > 0) {
+        
+     
         res.status(200).json({
             status: "success",
             status_code: 200,
-            message: "api.messages.index.success",
-            data: sub,
+            
+            data: data.recordset,
 
         });
     } else {
-        res.status(500).json({
+        res.status(404).json({
             status: "failed",
-            status_code: 500,
+            status_code: 404,
             message: "submission is not fond",
 
         });
@@ -55,12 +90,32 @@ router.get('/:sub_id', (req, res) => {
 });
 
  
-router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
+router.post('/',upload.single('image'),checkoutSubmissionPayload ,async (req, res) => {
+
+    if(isSubmissionEnabled != true)
+    {
+       // upload is unenabled 
+       return res.status(400).json(
+        {
+            status:"failed",
+            status_code :400,
+            error :"uploading is not enabled any more"
+        }
+       )
+    }
 
     //check if there is a submission for requested Email
   const checkData =await   submissionRepo.CheckSubmission(req.body.email) ;
-   if(checkData.rowsAffected[0] ===0)
-   {   
+   if(checkData.rowsAffected[0] >0)
+   {
+      // email is already registered
+  return    res.status(400).json({
+    status: "failed",
+    status_code :400,
+    message : "email has been already registered !"
+  })
+   }
+     
       // email first Time requested
     const firstname = req.body.legalguardian_firstname;
     const lastname = req.body.legalguardian_lastname;
@@ -79,21 +134,17 @@ router.post('/',upload.single('image'),checkoutSubmission ,async (req, res) => {
         submission:obj
      })
        
-   }else{
-    // email is already registered
-  return    res.status(400).json({
-        status: "failed",
-        status_code :400,
-        message : "email has been already registered !"
-      })
-   }
+   
+  
+   
     
   
 });
 
 
-const authMan = require("./utility/AuthenticateTokenManager");
+
 const path = require('path');
+const { error } = require('console');
 
 router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
     id= req.params.sub_id; 
@@ -142,8 +193,6 @@ router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
 });
 
 
-
-
 router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkupdatePayload ,async (req,res)=>{
     id= req.params.sub_id; 
     const authEmail = req.user.name;
@@ -159,7 +208,7 @@ router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkup
     })
    }
 
-    const data = await submissionRepo.UpDateSubmission(id,req.body.firstName,req.body.lastName,req.body.email,req.body.childName,req.body.childAge,req.file.filename,req.body.likeCount);
+    const data = await submissionRepo.UpdateSubmission(id,req.body.firstName,req.body.lastName,req.body.email,req.body.childName,req.body.childAge,req.file.filename,req.body.likeCount);
      
     if(data.rowsAffected[0]< 1)
     {
@@ -184,11 +233,6 @@ router.put('/:sub_id',upload.single('img'),tokenManger.authenticateToken,checkup
 });
 
 
-
-
-
-
-// ------middleware to handle multidata form -----------------------
 
 
 module.exports = router ;

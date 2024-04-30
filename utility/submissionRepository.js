@@ -57,7 +57,7 @@ class submissionRepository
    return   await sql.query(queryString);
     }
 
-    async UpDateSubmission(ID,firstName , lastName, email, childName , childAge , imgName , LikeCount )
+    async UpdateSubmission(ID,firstName , lastName, email, childName , childAge , imgName , LikeCount )
     {
       await sql.connect('Server=DESKTOP-8MTNL02\\SQLEXPRESS;Database=SubmissionDB; User ID=omar;Password=123;Encrypt=True;TrustServerCertificate=True;');
       const queryString = `Update Submission Set FirstName = \'${firstName}\' , LastName = \'${lastName}\' , Email = \'${email}\' , ChildName = \'${childName}\' , ChildAge = ${childAge} ,
@@ -80,6 +80,8 @@ class submissionRepository
       const queryString = `Select Top 1 * From Submission order by 1 desc ` ;
       return await sql.query(queryString);
     }
+
+    
 
 }
 

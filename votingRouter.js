@@ -2,11 +2,59 @@ const express = require('express');
 const router = express.Router();
 const SubmissionRepo = require('./utility/submissionRepository');
 const VoteRepo = require('./utility/VoteRepository');
+const tokenManger = require('./utility/AuthenticateTokenManager');
+const userMan = require('./utility/UserManager');
+let isVotingEnabled = true;
+
+router.post('/ControlVoting',tokenManger.authenticateToken,async(req,res)=>{
+       
+    const authEmail = req.user.name;
+    const authPass = req.user.pass;
+    isValid = await userMan.HasAdminRole(authEmail,authPass);
+    if(isValid != true)
+    {
+     return res.status(401).json({
+         status:"failed",
+         status_code:401,
+         message:"unauthorized process"
+     })
+    }
+    
+    let message = ''
+    if(isVotingEnabled  === true)
+    {
+        isVotingEnabled = false;
+        message = 'voting is unenabled'
+
+    }else{
+        isVotingEnabled  = true;
+        message ='voting is enabled';
+    }
+
+    return res.status(200).json({
+        status:'success',
+        status_code:200,
+        message
+    })
+
+ })
+
 
 
 router.post('/:subID', async(req,res)=>{
 
-   
+    if(isVotingEnabled != true)
+    {
+       // upload is unenabled 
+       return res.status(400).json(
+        {
+            status:"failed",
+            status_code :400,
+            error :"voting is not enabled any more"
+        }
+       )
+    }
+
     if(!req.body.email)
     {
         return res.status(401).json({
@@ -14,10 +62,21 @@ router.post('/:subID', async(req,res)=>{
             status_code :401,
             error:"email is required !"
            });
-    
     }
-    
 
+ 
+    //only 5 votes pro email allowed 
+    const dateVotes = await VoteRepo.GetVotes(req.body.email);
+    if(dateVotes.rowsAffected[0] >= 5)
+    {
+       return res.status(400).json({
+        status:"failed",
+        status_code:400,
+        error:"only 5 votes pro email is allowed !"
+       })
+    }
+      
+    
        const data = await SubmissionRepo.GetSubmissionById(req.params.subID);
        if(data.rowsAffected[0] < 1)
        {
@@ -28,7 +87,7 @@ router.post('/:subID', async(req,res)=>{
         })
        } 
   
-        // check if there is a vote from owner of email to requested submission
+        // one vote per email and submission allowed
           const voteData = await  VoteRepo.GetVote(req.params.subID , req.body.email);
           if(voteData.rowsAffected[0] >0)
           {
@@ -39,7 +98,7 @@ router.post('/:subID', async(req,res)=>{
             })
           }
         
-           const updatedData = await SubmissionRepo.AddVoteToSubmission(req.params.subID);
+           const updatedData = await VoteRepo.AddVoteToSubmission(req.params.subID, req.body.email);
            if(updatedData.rowsAffected[0]< 1)
            {
                return res.status(500).json({
