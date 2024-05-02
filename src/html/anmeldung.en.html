@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../style/anmelungpage.css" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/translate.js" defer></script>
+    <script src="../js/anmeldung.js" defer></script>
+</head>
+
+<body>
+ 
+    <nav class="sprache">
+        <ul>
+            <li class="flagge de">
+                <img src="../img/deutsh.png"> 
+            </li>
+
+            <li class="flagge en">
+                <img src="../img/englisch.png">
+            </li>
+        </ul>
+
+    </nav>
+
+    
+
+    <form  id="form" enctype="multipart/form-data">
+
+      <h1> <strong>Contact form for uploading images</strong></h1> 
+
+        <p>Please fill in all required fields, agree to each condition, and upload the image</p>
+
+        
+
+        <div class="form-group hidelabel">
+            <label for="vorname">Title <span>Use title case to get a better result</span></label>
+            <input type="text" name="vorname" id="vorname" class="form-controll" placeholder="First name of Legal Guardian *" required />
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="nachname">Title <span>Use title case to get a better result</span></label>
+            <input type="text" name="nachname" id="nachname" class="form-controll" placeholder="Last name of Legal Guardian *" required />
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="email">Title <span>Use title case to get a better result</span></label>
+            <input type="email" name="email" id="email" class="form-controll" placeholder="E-mail address for notification *" required />
+        </div>
+
+
+        <div class="form-group hidelabel">
+            <label for="kindname">Caption <span>This caption should be descriptive</span></label>
+            <input type="text" name="kindname" id="kindname" class="form-controll" placeholder="Child's first name *" required/>
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="alter">Title <span>Use title case to get a better result</span></label>
+            <input type="number" name="alter" id="alter" class="form-controll" placeholder="Child's age *" required/>
+        </div>
+
+        <div class="form-group file-area">
+            
+            <input type="file" name="image" id="image" required="required"  />
+            <div class="file-dummy">
+                <p class="success">Well done, your image has been selected</p>
+                <p class="default"> Please insert an image</p>
+            </div>
+        </div>
+
+        <div class="form-group form-checkbox">
+        <input type="checkbox" id="zustimmung1" name="zustimmung1" value="1" required>
+        <label for="vehicle1"> Consent to Copyright</label><br>
+        <input type="checkbox" id="zustimmung2" name="zustimmung2" value="1" required>
+        <label for="vehicle2"> Consent to Participate in Exhibition</label><br>
+        <input type="checkbox" id="zustimmung3" name="zustimmung3" value="1" required>
+        <label for="vehicle3"> Consent to Notification by Email</label><br>
+        <span>* Required fields</span>
+        </div>
+
+        
+
+    </form>
+
+    <div class="form-group" >
+        <button id="submite">Upload</button>
+    </div>
+
+    <!-- div for error after sending data-->
+    <div class="form-group">
+        <p style="color: red; display: none;" id="error" >gfgfgfg </p>
+    </div>
+    <!---->
+
+    <!--div for success message after sending data-->
+    <div class="from-group">
+        <p style="color: green; display: none;" id="success" >Thank you very much for your participation! Your artwork will soon be on display in the gallery</p>
+    </div>
+       <!-- -->
+
+    <div class="anmelde-container">
+        <h4>CONTACT FORM FOR UPLOADING IMAGES</h4>
+        <h4> Please fill in all required fields, agree to each condition, and upload the image!</h4>
+        <p style="background: #FBF315; color: #000000;"><b>Thank you very much for your participation</b> <br>
+        <b>Your artwork will soon be visible in the Sumsi Gallery.</b></p>
+    </div>
+
+
+
+
+    
+
+    <a href="./homepage.html" class="back-to-article" > Home page</a>
+
+
+    <script>
+        console.log('hallow worls!') ;
+        var elementType = document.getElementsByTagName('input');
+
+if (elementType[0].tagName =='INPUT'){
+
+    console.log(elementType[0].placeholder);
+}
+    </script>
+
+
+</body>
+
+</html>
