@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs')
 const submissionRepo = require('./utility/submissionRepository');
-const image = require('./imageclass').IMAGE;
+
 const upload = require('./utility/multer');
  const checkoutSubmissionPayload  = require('./utility/checkoutSubmissionPayload');
 
@@ -47,6 +47,15 @@ const upload = require('./utility/multer');
 
  })
 
+ router.get('/ControlSubmission', (req,res)=>{
+       
+    res.status(200).json({
+        status:"success",
+        status_code:200,
+        uploading:isSubmissionEnabled 
+    })
+ });
+
 router.get('/', async(req, res) => {
     let data = [];
     var responseData = await  submissionRepo.GetSubmissions() ;
@@ -72,7 +81,6 @@ router.get('/:sub_id', async(req, res) => {
         res.status(200).json({
             status: "success",
             status_code: 200,
-            
             data: data.recordset,
 
         });
@@ -144,7 +152,7 @@ router.post('/',upload.single('image'),checkoutSubmissionPayload ,async (req, re
 
 
 const path = require('path');
-const { error } = require('console');
+
 
 router.delete('/:sub_id',tokenManger.authenticateToken ,async (req, res) => {
     id= req.params.sub_id; 

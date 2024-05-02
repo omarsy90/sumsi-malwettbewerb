@@ -33,16 +33,14 @@ app.use('/login',AuthRouter);
 app.use('/submission',SubmissionRouter);
 app.use('/voting',VoteRouter);
 app.get('/:FileName', (req,res)=>{
-    
     const filePath = path.join(__dirname, 'uploads', req.params.FileName)
     res.sendFile(filePath);
 });
 
 
-app.listen(3000, () => {
-    
-    console.log('server is running...');
-    console.log(process.env.test)
+app.listen(3000, () => {   
+   console.log('server is running...');
+   
 })
 
 //-------------------------------------------------------code von api ----------------

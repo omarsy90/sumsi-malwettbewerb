@@ -2,7 +2,7 @@
 const CheckUpdatePayload = (req, res,next)=>
 {
 
-  console.log(req.body.firstName);
+  
    let err = "";
   const id = req.params.sub_id ;
   const firstName = req.body.firstName ;

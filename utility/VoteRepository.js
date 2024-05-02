@@ -1,3 +1,4 @@
+require('dotenv').config() ;
 const sql = require('mssql')
 
 class VoteRepository
@@ -5,7 +6,7 @@ class VoteRepository
   
     async GetVote(submissionID , email)
     {
-        await sql.connect('Server=DESKTOP-8MTNL02\\SQLEXPRESS;Database=SubmissionDB; User ID=omar;Password=123;Encrypt=True;TrustServerCertificate=True;');
+        await sql.connect(process.env.ConnectionString);
         const queryString = `Select * From Vote Where SubmissionID = ${submissionID}  And Email = \'${email}\' ` ;
         return  await sql.query(queryString);  
     }  
@@ -13,14 +14,14 @@ class VoteRepository
 
  async GetVotes( email)
  {
-    await sql.connect('Server=DESKTOP-8MTNL02\\SQLEXPRESS;Database=SubmissionDB; User ID=omar;Password=123;Encrypt=True;TrustServerCertificate=True;');
+    await sql.connect(process.env.ConnectionString);
     const queryString =`Select * From Vote Where [Email] = \'${email}\' ;  `
     return sql.query(queryString);
  }
 
  async AddVoteToSubmission(submissionID, email)
     {
-      await sql.connect('Server=DESKTOP-8MTNL02\\SQLEXPRESS;Database=SubmissionDB; User ID=omar;Password=123;Encrypt=True;TrustServerCertificate=True;');
+      await sql.connect(process.env.ConnectionString);
       const queryString =` Declare @likeCount Int ;
       Select Top 1 @likeCount = LikeCount from Submission where SubmissionID = ${submissionID} ;
      Set @likeCount = @likeCount +1 ;

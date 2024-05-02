@@ -39,6 +39,14 @@ router.post('/ControlVoting',tokenManger.authenticateToken,async(req,res)=>{
 
  })
 
+ router.get('/ControlVoting' , (req,res)=>{
+   
+    res.status(200).json({
+        status: "success",
+        status_code :200,
+        voting: isVotingEnabled
+    })
+ });
 
 
 router.post('/:subID', async(req,res)=>{
