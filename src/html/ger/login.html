@@ -7,76 +7,8 @@
     <title>Raiffeisen Landesbank Kärnten</title>
     <link rel="stylesheet" href="/src/style/style.css">
   
-    <script src="../js/loging.js" defer></script>
-
-</head>
-<body>
-    <header>
-        <img src="../img/reife_reisen_logo.png" alt="Raifeisenlogo" class="raifeisenlogo">
-         
-        <nav>
-            <ul>
-                <li class="ignore"><a href="./homepage.html">Startseite</a></li>
-                <li class="ignore"><a href="./anmeldung.html">Anmelden</a></li>
-            </ul>
-        </nav>
-
-        <nav class="sprache">
-            <ul>
-                <li class="flagge de">
-                    <img src="../img/deutsh.png"> 
-                </li>
-
-                <li class="flagge en">
-                    <img src="../img/englisch.png">
-                </li>
-            </ul>
-
-        </nav>
-          <div class="nav_mobile"></div>
-    </header>
-    <div class="menu-mobile">
-        <nav class="pagelist">
-            <ul>
-                <li class="ignore"><a href="./homepage.html">Startseite</a></li>
-                <li class="ignore"><a href="./anmeldung.html">Anmelden</a></li>
-              
-                
-            </ul>
-        </nav>
-
-        <nav class="sprache">
-            <ul>
-                <li class="flagge de" >
-                    <img src="../img/deutsh.png"> 
-                </li>
-
-                <li class="flagge en" >
-                    <img src="../img/englisch.png">
-                </li>
-            </ul>
-
-        </nav>
-    </div>
-
-    <section class="box" >
-        <h1>Login</h1>
-        <input type="text" name="email" placeholder="Email" id="email">
-        <input type="password" name="password" placeholder="Password" id="password">
-        <input type="submit" name="" value="Login" id="submite">
-    </section>
-
-    <div class="notify">
-        <table id="table">
-            <tr><td> Abgabensituation :</td> <td id="abgabe">offen</td></tr>
-            <tr><td>Bewertungssitaution :</td> <td id="bewertung">geschlossen</td> </tr>
-        </table>
-    </div>
-
-    <p class="error_notify"> entweder  Email oder Passwort ist falsch</p>
-       
-    
-    
+    <script src="../../js/loging.js" defer></script>
+    <script src="../../js/shared.js" defer ></script>
     <style>
 
         .error_notify{
@@ -171,8 +103,69 @@
             border-radius: 1rem;
             display: none;
         }
-
-
     </style>
+
+</head>
+<body>
+    <header>
+        <img src="../../img/reife_reisen_logo.png" alt="Raifeisenlogo" class="raifeisenlogo">
+         
+        <nav>
+            <ul>
+                <li class="ignore"><a href="./homepage.html">Startseite</a></li>
+            </ul>
+        </nav>
+
+        <nav class="sprache">
+            <ul>
+                <li class="flagge ger">
+                    <img src="../../img/deutsh.png"> 
+                </li>
+
+                <li class="flagge eng">
+                    <img src="../../img/englisch.png">
+                </li>
+            </ul>
+
+        </nav>
+          <div class="nav_mobile"></div>
+    </header>
+    <div class="menu-mobile">
+        <nav class="pagelist">
+            <ul>
+                <li class="ignore"><a href="./homepage.html">Startseite</a></li> 
+            </ul>
+        </nav>
+
+        <nav class="sprache">
+            <ul>
+                <li class="flagge ger" >
+                    <img src="../../img/deutsh.png"> 
+                </li>
+
+                <li class="flagge eng" >
+                    <img src="../../img/englisch.png">
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+
+    <section class="box" >
+        <h1>Login</h1>
+        <input type="text" name="email" placeholder="Email" id="email">
+        <input type="password" name="password" placeholder="Password" id="password">
+        <input type="submit" name="" value="Login" id="submite">
+    </section>
+
+    <div class="notify">
+        <table id="table">
+            <tr><td> Abgabensituation :</td> <td id="abgabe">offen</td></tr>
+            <tr><td>Bewertungssitaution :</td> <td id="bewertung">geschlossen</td> </tr>
+        </table>
+    </div>
+
+    <p class="error_notify"> entweder  Email oder Passwort ist falsch</p>
+       
 </body>
 </html>

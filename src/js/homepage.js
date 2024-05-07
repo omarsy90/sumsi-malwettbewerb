@@ -1,26 +1,6 @@
 
-
-function headerAnpassen() {
-    const navicon = document.querySelector('.nav_mobile');
-    console.log(navicon);
-    navicon.addEventListener('click', (e) => {
-        const navDiv = document.querySelector('.menu-mobile');
-        console.log(navDiv);
-        if (navDiv.style.display === 'block') {
-            console.log('block')
-            navDiv.style.display = 'none'
-        } else {
-            console.log('none')
-            navDiv.style.display = 'block'
-        }
-    })
-}
-headerAnpassen();
-
-
-
 const bilderSection = document.getElementById('bilder');
-console.log(bilderSection);
+
 
 let countBilder = 6;
 
