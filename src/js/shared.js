@@ -6,7 +6,6 @@
         }
       });
 headerAnpassen();
-
 CustomiseClickOnLinkBehaviour();
 AddEventListnerForLanguageChange()
 
@@ -50,7 +49,12 @@ AddEventListnerForLanguageChange()
                 const lang = getCookie('lang');
                 LoadingPageForLanguage(href,lang)
              }
-        }  
+        }
+        
+        if(extension.includes('pdf'))
+        {
+             window.location.href = href;
+        }
     }
  }
     
