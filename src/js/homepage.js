@@ -21,28 +21,34 @@ function printAllFotos() {
 
     getAllsubmission()
         .then(response => {
-
-            console.log(response.data);
             const arrayData = response.data;
-              
-            console.log(arrayData) ;
             if (arrayData.length > 0) {
 
                 bilderSection.innerHTML = '';
                 for (let i = 0; i < arrayData.length; i++) {
+                  
+             
 
-                    if (i < countBilder) {
+                   
 
-                        bilderSection.innerHTML = bilderSection.innerHTML + ` <div class="element"> <a href="./bilder.html?sub_id=${arrayData[i].id}"> <div class="bild" id="${arrayData[i].image.id}" ></div> </a> <div class="bilder_element_footer"> <button class="like__btn"> <span id="icon"><i class="far fa-thumbs-up"></i></span> <span id="count">${arrayData[i].like}</span> Like </button> <div class="kind_name">${arrayData[i].child_firstname}</div> </div> </div>  `;
+                       bilderSection.innerHTML = bilderSection.innerHTML + `
+                         <div class="element"> 
+                         <a href="./bilder.html?sub_id=${arrayData[i].SubmissionID}"> <div class="bild" id =\"${arrayData[i].SubmissionID}\"  ></div> 
+                         </a> 
+                         <div class="bilder_element_footer">
+                          <button class="like__btn" data-submissionID="${arrayData[i].SubmissionID}"  onclick="LikeBtnClicked(event)"> <span id="icon"><i class="far fa-thumbs-up"></i></span> 
+                          <span id="count">${arrayData[i].LikeCount}</span> Like </button>
+                           <div class="kind_name">${arrayData[i].ChildName}</div> 
+                           </div> </div>  `;
 
-                        bildDiv = document.getElementById(`${arrayData[i].image.id}`);
-                        console.log(bildDiv);
-                        bildDiv.style.backgroundImage = `url("${arrayData[i].image.location}")`;
+                        bildDiv = document.getElementById(`${arrayData[i].SubmissionID}`);
+                        bildDiv.style.backgroundImage = `url("/uploads/${arrayData[i].ImgName}")`;
                         bildDiv.style.backgroundSize = 'cover';
                         bildDiv.style.backgrounRepeat = 'no-repeat';
+                        
 
 
-                    }
+                    
 
                 }
 
@@ -52,21 +58,19 @@ function printAllFotos() {
 
 
         }).catch(error => {
-            //  console.log(error)
+              console.log(error)
         });
 
 }
 
-printAllFotos() ;
+printAllFotos() ; 
+function LikeBtnClicked(event)
+{
+   console.log(event.target.getAttribute('data-submissionID'))
+}
 
 
 
 
-const seemoreButton = document.getElementById('see_more');
-seemoreButton.addEventListener('click',(event)=>{
- 
-    countBilder= countBilder+2 ;
-    printAllFotos();
 
-})  ;
 

@@ -13,6 +13,18 @@ body {
     font-family: Verdana Regular;
 }
 
+.like__btn
+{
+  cursor: pointer;
+  
+  
+}
+.like__btn:hover
+{
+    background-color: rgb(23, 70, 70);
+    border-style: solid;
+    border-width: 2px;
+}
 
 @media only screen and (max-width: 1000px) {
 
