@@ -1,9 +1,14 @@
 
-const bilderSection = document.getElementById('bilder');
-bilderSection.innerHTML = '';
+const SubmissionHtmlSection = document.getElementById('bilder');
+SubmissionHtmlSection.innerHTML = '';
 let SelectedSubmissionID = -1 ; 
 DisplaySubmission() ; 
-let countBilder = 6;
+let SubmissionArray  = [] ;
+let MaxDisplayedSubmission = 2;
+let Increment = 2;
+let LastIndexOfDisplayedSubmission  = 0;
+
+
 
 function DisplaySubmission() 
 {
@@ -23,13 +28,17 @@ function DisplaySubmission()
 
     getAllsubmission()
         .then(response => {
-            const arrayData = response.data;
-            if (arrayData.length > 0)
+             SubmissionArray = SubmissionArray.concat( response.data);
+            if (SubmissionArray.length > 0)
             {
                 
-                for (let i = 0; i < arrayData.length; i++)
-                     {
-                        ResolveSubmissionInHtml(bilderSection,arrayData[i])
+                for (let i = 0; i < SubmissionArray.length; i++)
+                    {
+                        if(i < MaxDisplayedSubmission )
+                            {
+                                ResolveSubmissionInHtml(SubmissionHtmlSection,SubmissionArray[i]);
+                                LastIndexOfDisplayedSubmission = i;
+                            }  
                     }
             }
         }).catch(error => {
@@ -38,6 +47,38 @@ function DisplaySubmission()
 
 }
 
+
+function ShowMoreSubmission(event)
+{
+     if(SubmissionArray.length <= LastIndexOfDisplayedSubmission+1)
+        {
+            return ;
+        }
+        let newMaxDisplayedSubmission = MaxDisplayedSubmission+Increment ;
+        for(let i = LastIndexOfDisplayedSubmission+1 ; i< SubmissionArray.length ; i++)
+            {
+                 if( i < newMaxDisplayedSubmission) 
+                    {
+                        ResolveSubmissionInHtml(SubmissionHtmlSection,SubmissionArray[i]);
+                        LastIndexOfDisplayedSubmission = i;
+                    }
+                    
+           }
+      
+           MaxDisplayedSubmission = newMaxDisplayedSubmission;
+
+           if(LastIndexOfDisplayedSubmission === SubmissionArray.length -1 )
+            {
+                console.log("the length of array : "+SubmissionArray.length);
+                HideShwMoreButton();
+            }
+}
+
+function HideShwMoreButton()
+{
+    const  seeMoreBtn = document.getElementById("see_more");
+    seeMoreBtn.style.visibility ="hidden";
+}
 
  function LikeBtnClicked(event)
 {
@@ -93,7 +134,7 @@ async function UpdateLikeCountForSubmission(submissionID)
 
 function ResolveSubmissionInHtml( htmlSection,submission)
 {
-    htmlSection.innerHTML +=  `
+    SubmissionHtmlSection.innerHTML +=  `
     <div class="element" data-submissionID="${submission.SubmissionID}" > 
     <a href="./bilder.html?sub_id=${submission.SubmissionID}"> <div class="bild" id =\"${submission.SubmissionID}\"  ></div> 
     </a> 
