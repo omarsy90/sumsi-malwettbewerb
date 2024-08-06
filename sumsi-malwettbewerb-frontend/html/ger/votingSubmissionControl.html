@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Div with Toggles in Table</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/votingSubmissionControl.css">
+
+     <script src="/js/lib/jquery.slim.min.js" defer ></script>
+    <script src="/js/lib/bootstrap.bundle.min.js" defer></script>
+    <script src="/js/lib/propper.min.js"></script>
+    <script src="/js/shared.js" defer ></script>
+    <script src="/js/votingSubmissionControl.js" type="module"  defer></script>
+
+</head>
+<body>
+
+    <header>
+        <img src="../../img/reife_reisen_logo.png" alt="Raifeisenlogo" class="raifeisenlogo">
+         
+        <nav>
+            <ul>
+                <li class="ignore"><a href="./homepage.html">Startseite</a></li>
+            </ul>
+        </nav>
+
+        <nav class="sprache">
+            <ul>
+                <li class="flagge ger">
+                    <img src="../../img/deutsh.png"> 
+                </li>
+
+                <li class="flagge eng">
+                    <img src="../../img/englisch.png">
+                </li>
+            </ul>
+
+        </nav>
+          <div class="nav_mobile"></div>
+    </header>
+    <div class="menu-mobile">
+        <nav class="pagelist">
+            <ul>
+                <li class="ignore"><a href="./homepage.html">Startseite</a></li> 
+            </ul>
+        </nav>
+
+        <nav class="sprache">
+            <ul>
+                <li class="flagge ger" >
+                    <img src="../../img/deutsh.png"> 
+                </li>
+
+                <li class="flagge eng" >
+                    <img src="../../img/englisch.png">
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+
+    <div class="wrapper">
+        <div class="centered-div">
+            <table>
+                <tr>
+                    <td><label for="toggle1">submission status</label></td>
+                    <td>
+                        <label class="switch">
+                            <input id="submission-toggle" type="checkbox" >
+                            <span class="slider round"></span>
+                          </label>
+                    </td>
+                    <td>
+                        <label for="toggle1" id="toggle1-defaultValue" >unbekannt</label>
+                        <label for="toggle1" id="toggle1-active" >Aktive</label>
+                        <label for="toggle1" id="toggle1-notActive" >nicht Aktive</label>
+                    </td>
+                    <td> 
+                        <label id="submission-request-success" >aktulisiert</label>
+                        <label id="submission-request-error" style="color: red;" >Fehler ist aufgetreten</label>
+                        <div class="spinner-border spinner-submission" role="status"  style="visibility: hidden;" >
+                            <span class="sr-only">Laden...</span>
+                          </div>
+                     </td>
+                </tr>
+                <tr>
+                    <td><label for="toggle2">voting status</label></td>
+                    <td>
+                        <label class="switch">
+                            <input id="voting-toggle" type="checkbox" >
+                            <span class="slider round"></span>
+                          </label>
+                    </td>
+                    <td>
+                        <label for="toggle2" id="toggle2-defaultValue" >unbekannt</label>
+                        <label for="toggle2" id="toggle2-active" >Aktive</label>
+                        <label for="toggle2" id="toggle2-notActive" >nicht Aktive</label>
+                    </td>
+                    <td>
+                        <label id="voting-request-success" >aktulisiert</label>
+                        <label id="voting-request-error" style="color: red;" >Fehler ist aufgetreten</label>
+                        <div class="spinner-border spinner-voting" role="status" style="visibility: hidden;"  >
+                            <span class="sr-only">Laden...</span>
+                          </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

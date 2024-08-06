@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": ";AAAA,AAAA,UAAU,CAAA;EACN,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;EAC7B,WAAW,EAAE,MAAM;EACnB,UAAU,EAAE,OAAO;EACnB,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "explanatoryStep.scss"
+    ],
+    "names": [],
+    "file": "explanatoryStep.css"
+}

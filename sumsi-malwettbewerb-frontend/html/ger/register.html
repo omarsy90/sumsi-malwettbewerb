@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../../style/register.css" rel="stylesheet">
+    <script src="../../js/register.js" type="module" defer></script>
+    <script src="../../js/shared.js" defer ></script>
+</head>
+
+<body>
+ 
+    <nav class="sprache">
+        <ul>
+            <li class="flagge ger">
+                <img src="../../img/deutsh.png"> 
+            </li>
+
+            <li class="flagge eng">
+                <img src="../../img/englisch.png">
+            </li>
+        </ul>
+
+    </nav>
+
+    
+
+    <form  id="form" enctype="multipart/form-data"  >
+
+      <h1> <strong>Kontaktformular zum bilder hochladen </strong></h1> 
+
+        <p>bitte hier alle Pflichtfelder ausfüllen , den einzelnen Bedingungen zustimmen und das bild hochladen</p>
+
+        
+
+        <div class="form-group hidelabel">
+            <label for="fName">Title <span>Use title case to get a better result</span></label>
+            <input type="text" name="legalguardian_firstname" id="fName" class="form-controll" placeholder="vorname Erziehungsberichtige/r *" required />
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="lName">Title <span>Use title case to get a better result</span></label>
+            <input type="text" name="legalguardian_lastname" id="lName" class="form-controll" placeholder="nachname Erziehungsberichtige/r *" required />
+        </div>
+
+        <div class="form-group hidelabel">
+            <label for="email">Title <span>Use title case to get a better result</span></label>
+            <input type="email" name="email" id="email" class="form-controll" placeholder="E-mail-adresse zum Verständigen *" required />
+        </div>
+
+
+        <div class="form-group hidelabel">
+            <label for="childName">Caption <span>This caption should be descriptiv</span></label>
+            <input type="text" name="child_firstname" id="childName" class="form-controll" placeholder="Vorname kind *" required/>
+        </div>
+
+        <div class="form-group  hidelabel">
+            <label for="age">Title <span>Use title case to get a better result</span></label>
+            <input type="number" name="child_age" id="age" class="form-controll" placeholder="Alter kind *" required/>
+        </div>
+
+        <div class="form-group file-area">
+            
+            <input type="file" name="image" id="image" required="required"  />
+            <div class="file-dummy">
+                <p class="success">Gut gemacht, dein Bild wurde ausgewählt</p>
+                <p class="default"> Bitte ein Bild einfügen</p>
+            </div>
+        </div>
+
+        <div class="form-group form-checkbox">
+        <input type="checkbox" id="consent1" name="approval_privacypolicy" value="true" required>
+        <label for="consent1"> Zustimmung Urheberrecht</label><br>
+        <input type="checkbox" id="consent2" name="approval_participation" value="true" required>
+        <label for="consent2"> Zustimmung Teilname Ausstellung</label><br>
+        <input type="checkbox" id="consent3" name="approval_mailnotification" value="true" required>
+        <label for="consent3"> Zustimmung Verständigung per Mail</label><br>
+        <span>* Pflichtfelder</span>
+        </div>
+
+        <div class="form-group" >
+            <button  type="submit"  id="submit"> hochladen</button>
+        </div>
+       
+    </form>
+   
+    
+    
+
+    <!-- div for error after sending data-->
+    <div class="div-error">
+        <p style="color: red; display: none;" id="error-paragraph" > </p>
+    </div>
+    <!---->
+      
+      <!--div for seccess message after sending data-->
+    <div class="div-success">
+        <p style="color: green; display: none;" id="success-paragraph" >vielen Dank für deine Teilnahme !  dein Kunstwerk wird in küzrze in Galerie zu sehen sein</p>
+    </div>
+   
+       <!-- -->
+
+   
+
+    <a href="./homepage.html" class="back-to-article" > statrtseite</a>
+
+</body>
+
+</html>

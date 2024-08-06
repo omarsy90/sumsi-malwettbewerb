@@ -1,0 +1,98 @@
+@import './header';
+@import './explanatoryStep.scss';
+@import './infosection';
+@import './imagessection';
+@import './footer';
+@import './mobile-menu';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana Regular;
+}
+
+.like__btn
+{
+  cursor: pointer;
+  
+  
+}
+.like__btn:hover
+{
+    background-color: rgb(23, 70, 70);
+    border-style: solid;
+    border-width: 2px;
+}
+
+
+.bilder_abteilung {
+    .leer{
+        font-size: 1.3rem; 
+        opacity: 0.5;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+    }
+
+    .element{
+        margin-top: 10px;
+        
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        height: 510px;
+
+    }
+}
+@media only screen and (max-width: 1000px) {
+
+    .bilder_abteilung {
+        
+       
+        .element {
+
+            width: 100%;
+           
+        }
+
+    }
+
+}
+
+
+@media only screen and (max-width: 800px) {
+
+    .coolertext {
+        visibility: hidden;
+    }
+
+    header {
+
+        height: 100px;
+
+        nav {
+            display: none;
+        }
+
+        .nav_mobile {
+            display: block;
+        }
+
+
+    }
+
+    h1 {
+
+        top: 400px;
+    }
+
+
+}
+
+
+
+
+
+

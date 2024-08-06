@@ -1,0 +1,140 @@
+.raifeisenlogo {
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    height: auto;
+    cursor: pointer;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px;
+    border-bottom: 2px solid whitesmoke;
+
+    li {
+        display: inline-block;
+        padding: 0px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        scroll-behavior: smooth;
+    }
+
+    li:hover {
+        transition: all 0.5s ease 0;
+        background: #FBF315;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    a{
+        text-decoration: none;
+    }
+}
+
+.jubelbiene {
+    height: auto;
+    width: 15%;
+    background: #FBF315;
+    border-radius: 20em;
+    transition: all 0.3s ease-in-out 0.2s;
+    margin-top: 80px;
+}
+
+.jubelbiene:hover {
+    transform: translateY(100px);
+    transition: all 0.3s ease-in-out 0.1s;
+}
+
+h1 {
+    margin: 0;
+    padding: 8px;
+    background: #FBF315;
+    text-align: center;
+    left: 0px;
+    width: 100%;
+
+}
+
+.malwand {
+    height: 20%;
+    width: auto;
+}
+
+.header-container {
+    padding: 20px;
+    background-image: url(../img/malwand.jpg);
+    background-size: cover;
+}
+
+.coolertext {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background: #FBF315;
+    position: absolute;
+    left: 80%;
+    top: 30%;
+    padding: 10px;
+    transform: rotate(350deg);
+    border-radius: 15px;
+    border: none;
+    transition: all 0.3s ease-in-out 0.2s;
+}
+
+.coolertext:hover {
+    transform: translateY(100px);
+    transition: all 0.3s ease-in-out 0.1s;
+}
+
+.text-container {
+
+    text-align: center;
+    width: 60%;
+    margin-left: 20%;
+    padding: auto;
+    background: #FBF315;
+    padding: 25px;
+    margin-top: 10px;
+
+
+
+    p {
+
+
+        border-radius: 15px;
+        //  border: 1px solid black;
+
+    }
+}
+
+.nav_mobile {
+    position: absolute;
+
+    top: 30px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: url('../img/navmobil.png');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: none;
+
+
+}
+
+.sprache {
+    ul {
+        margin-left: 50px;
+
+        li {
+            img {
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+}

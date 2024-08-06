@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raiffeisen Landesbank Kärnten</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link  rel="stylesheet" href="/style/login.css" />
+    <script   src="/js/login.js"  type="module"  defer></script>
+    <script src="/js/shared.js"   defer ></script>
+</head>
+<body>
+    <header>
+        <img src="../../img/reife_reisen_logo.png" alt="Raifeisenlogo" class="raifeisenlogo">
+        <nav>
+            <ul>
+                <li class="ignore"><a href="./homepage.html">Home Page</a></li>
+              
+            </ul>
+        </nav>
+        <nav class="sprache">
+            <ul>
+                <li class="flagge ger">
+                    <img src="../../img/deutsh.png"> 
+                </li>
+                <li class="flagge eng">
+                    <img src="../../img/englisch.png">
+                </li>
+            </ul>
+        </nav>
+        <div class="nav_mobile"></div>
+    </header>
+    <div class="menu-mobile">
+        <nav class="pagelist">
+            <ul>
+                <li class="ignore"><a href="./homepage.html">Home Page</a></li>
+                <li class="ignore"><a href="./register.html">Log In</a></li>
+            </ul>
+        </nav>
+        <nav class="sprache">
+            <ul>
+                <li class="flagge ger">
+                    <img src="../../img/deutsh.png"> 
+                </li>
+                <li class="flagge eng">
+                    <img src="../../img/englisch.png">
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <section class="box" >
+        <h1>Login</h1>
+        <form id="loginForm" action="post">
+        <input type="text" name="email" placeholder="Email" id="email" required>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <input type="submit" name="" value="Login" id="submite">
+    </form>
+    </section>
+
+    <div class="notify">
+        <table id="table">
+            <tr><td> Submission Status :</td> <td id="abgabe">open</td></tr>
+            <tr><td>Review Status :</td> <td id="bewertung">closed</td> </tr>
+        </table>
+    </div>
+
+    <p class="error_notify"> Either the email or password is incorrect</p>
+</body>
+</html>

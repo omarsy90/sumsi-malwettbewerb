@@ -1,0 +1,125 @@
+
+.bilder_abteilung{
+
+   // background-color: blue;
+    
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+
+   
+    .element{
+
+        width: 500px;
+        height:500px ;
+        margin-top: 50px;
+        transition: width 1s , height 1s , transform 1s ;
+        &:hover{
+            
+            box-shadow: 20 10px 10px rgba(24, 17, 17, 0.2);
+           transform: translate(0,-18px);    
+        }
+
+        div.bild{
+        background-size: cover;
+        background-repeat: no-repeat;
+            width: 100%;
+            height: 450px;
+
+             
+        }
+
+        div.bilder_element_footer{
+
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            margin: 5px;
+           
+            .like-button{
+
+        
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 60%;
+                height: 50px;
+                font-size: 2rem;
+                border-radius: 1px;
+                
+                
+                &:hover{
+                cursor: default;
+                    
+                }
+        
+               }
+        
+               div.kind_name{
+                background-color: #E2F5ED;
+                width: 30%;
+                padding: 10px;
+                font-size: 20px;
+                
+            }
+
+        }
+
+        
+
+      
+
+    }
+
+
+
+}
+
+
+.see-more-button {
+     text-align: center;
+     margin-bottom: 15px;
+   
+   
+  }
+  
+  .see-more-button button {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  
+  .see-more-button button:hover {
+    background-color: #FBF315;
+  }
+        
+    
+    
+
+
+
+@keyframes fotoanimate {
+
+    0% {width: 100%;}
+    100%{ width: 100.5%;  height: 100.5%;}
+    
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+
+.like__btn {
+  padding: 10px 15px;
+  background: #000000;
+  font-size: 18px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  
+}
+
+
+

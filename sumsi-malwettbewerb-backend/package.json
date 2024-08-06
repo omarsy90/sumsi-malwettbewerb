@@ -1,0 +1,24 @@
+{
+  "name": "sumsi-malwettbewerb-omar-u-rohit",
+  "version": "1.0.0",
+  "description": "readme--",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
+  "author": "omar",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/translate": "^6.3.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "hash-generator": "^0.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mssql": "^10.0.2",
+    "multer": "^1.4.4",
+    "sweetalert2": "^11.3.2"
+  }
+}
