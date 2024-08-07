@@ -5,7 +5,7 @@ class SqlRunner
 {
   async  Execute(command)
     {
-        await sql.connect(process.env.ConnectionString);
+      await sql.connect(process.env.ConnectionString);
         const queryString = command;
        return await sql.query(queryString);
     }
